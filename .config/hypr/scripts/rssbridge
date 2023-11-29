@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Define the directory where you want to run the docker-compose command
+docker_directory="$HOME/Docker/Containers/rssbridge/"
+
+# Change directory to the specified location
+cd "$docker_directory" || exit
+
+# Run the docker-compose command
+docker-compose up -d
+

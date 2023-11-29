@@ -1,0 +1,59 @@
+#!/bin/bash
+
+SCRIPTSDIR=$HOME/.config/hypr/scripts
+
+# Kill already running process
+_ps=(waybar mako)
+for _prs in "${_ps[@]}"; do
+	if [[ $(pidof ${_prs}) ]]; then
+		killall -9 ${_prs}
+	fi
+done
+
+# Apply themes
+${SCRIPTSDIR}/gtkthemes &
+
+# Lauch notification daemon (mako)
+${SCRIPTSDIR}/notifications &
+
+# Lauch statusbar (waybar)
+${SCRIPTSDIR}/statusbar &
+
+# Lauch syncthing (waybar)
+${SCRIPTSDIR}/syncthing &
+
+# Launch yt-local
+${SCRIPTSDIR}/ytlocal &
+
+# Lauch statusbar (waybar)
+${SCRIPTSDIR}/diary &
+
+# battry reminder
+${SCRIPTSDIR}/battery &
+
+# volume-notify
+${SCRIPTSDIR}/volume-notify &
+
+# volume-notify
+${SCRIPTSDIR}/brightness-notify &
+
+# ntfy server
+${SCRIPTSDIR}/ntfy &
+#dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
+
+# ntfy battery notification
+${SCRIPTSDIR}/ntfy_battery_test &
+#dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
+
+${SCRIPTSDIR}/freshrss-docker &
+
+${SCRIPTSDIR}/rssbridge &
+
+${SCRIPTSDIR}/python-server &
+
+#insync start &
+#dropbox &
+#telegram-desktop &
+#discord &
+#nm-applet-indicator
+#variety &

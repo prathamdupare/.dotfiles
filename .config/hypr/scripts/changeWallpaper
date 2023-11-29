@@ -1,0 +1,23 @@
+#!/bin/bash
+
+DIR=$HOME/bg
+PICS=($(ls ${DIR}))
+
+RANDOMPICS=${PICS[$RANDOM % ${#PICS[@]}]}
+
+if [[ $(pidof swaybg) ]]; then
+	pkill swaybg
+fi
+
+swaybg -m fill -i ${DIR}/${RANDOMPICS} &
+wal -i ${DIR}/${RANDOMPICS} &
+notify-send "${RANDOMPICS}"
+
+CONFIG="$HOME/.config/hypr/waybar/config"
+STYLE="$HOME/.config/hypr/waybar/style.css"
+
+killall waybar
+
+if [[ ! $(pidof waybar) ]]; then
+	waybar --bar main-bar --log-level error --config ${CONFIG} --style ${STYLE}
+fi

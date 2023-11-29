@@ -1,0 +1,19 @@
+#!/bin/bash
+
+while true
+do
+    battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+    if [[ $battery_level -le 5 ]]; then
+        notify-send "Battery low" "Battery level is ${battery_level}%!"
+        sleep 300 # Wait for 5 minutes before checking again
+    elif [[ $battery_level -le 10 ]]; then
+        notify-send "Battery low" "Battery level is ${battery_level}%!"
+        sleep 300 # Wait for 5 minutes before checking again
+    elif [[ $battery_level -le 15 ]]; then
+        notify-send "Battery low" "Battery level is ${battery_level}%!"
+        sleep 300 # Wait for 5 minutes before checking again
+    else
+        sleep 300 # Wait for 5 minutes before checking again
+    fi
+done
+

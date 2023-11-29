@@ -1,0 +1,25 @@
+#!/bin/bash
+
+server=https://ntfy.sh/Vicm5SSoc2BAZcPy7mHg
+
+while true
+do
+    battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+    if [[ $battery_level -le 5 ]]; then
+        curl -H "X-Title: Laptop Battery is Low" -d "Battery level is ${battery_level}%!" $server
+        sleep 200 # Wait for 5 minutes before checking again
+    elif [[ $battery_level -le 10 ]]; then
+        curl -H "X-Title: Laptop Battery is Low" -d "Battery level is ${battery_level}%!" $server
+        sleep 200 # Wait for 5 minutes before checking again
+    elif [[ $battery_level -le 15 ]]; then
+        curl -H "X-Title: Laptop Battery is Low" -d "Battery level is ${battery_level}%!" $server
+        sleep 200 # Wait for 5 minutes before checking again
+        elif [[ $battery_level -ge 98 ]]; then
+        curl -H "X-Title: Laptop Battery is Full!" -d "Battery level is ${battery_level}%!" $server
+        sleep 200 # Wait for 5 minutes before checking again
+    else
+        sleep 200 # Wait for 5 minutes before checking again
+    fi
+done
+
+
