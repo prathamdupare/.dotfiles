@@ -1,0 +1,138 @@
+/* Define Colors */
+@define-color text #cdd6f4;
+@define-color surface0 #313244;
+@define-color batcomputer #94ccff;
+
+/* Global Styling */
+* {
+  font-family: JetBrainsMono Nerd Font;
+  font-size: 13px;
+}
+
+/* Waybar Styling */
+window#waybar {
+  background-color: black;
+  color: @text;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+window#waybar.termite {
+  background-color: #3f3f3f;
+}
+
+window#waybar.chromium {
+  background-color: #000000;
+  border: none;
+}
+
+/* Button Styling */
+button {
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0px;
+}
+
+/* Workspaces Button Styling */
+#workspaces button {
+  padding: 0 3px;
+  color: @text;
+  border-radius: 15px;
+  margin: 5px 0 5px 5px;
+}
+
+#workspaces button:hover {
+  background: @surface0;
+  border: @surface0;
+}
+
+#workspaces button.selected {
+  background-color: @text;
+}
+
+#workspaces button.active {
+  background-color: @surface0;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @crust;
+}
+
+/* Module Styling */
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#bluetooth,
+#temperature,
+#custom-cycle_wall,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-power,
+#custom-updates,
+#custom-obsidian,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+  padding: 0 12px;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  margin: 5px 0;
+}
+
+/* Window and Workspaces Margin */
+#window,
+#workspaces {
+  margin: 0 4px;
+}
+
+/* Adjust Workspaces Margin based on Position */
+.modules-left > widget:first-child > #workspaces {
+  margin-left: 0;
+}
+
+.modules-right > widget:last-child > #workspaces {
+  margin-right: 0;
+}
+
+/* Focus Styling */
+label:focus {
+  background-color: #000000;
+}
+
+/* Network Status Styling */
+#network.disconnected {
+  color: @overlay1;
+}
+
+/* Battery Styling */
+#battery {
+  color: @batcomputer;
+}
+
+#battery.warning:not(.charging) {
+  background-color: @red;
+  color: @crust;
+  font-weight: bold;
+}
+
+/* Custom Power Styling */
+#custom-power {
+  color: pink;
+}
+
+#custom-obsidian {
+  background-color: white;
+  color: black;
+}

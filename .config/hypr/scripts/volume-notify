@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Initial volume level
+old_volume=$(amixer get Master | grep -oE '[0-9]+%' | head -n 1)
+notification_id=1
+
+# Function to send the notification
+send_notification() {
+    notify-send -u normal -a "VolumeControl" -i "audio-volume-medium" -t 2000 -h int:id:"$notification_id" "$1"
+}
+
+# Send the initial notification
+send_notification "Current volume: $old_volume"
+
+while true; do
+    # Get current volume level
+    current_volume=$(amixer get Master | grep -oE '[0-9]+%' | head -n 1)
+
+    # Compare current volume with old volume
+    if [[ "$current_volume" != "$old_volume" ]]; then
+        # Update the previous notification with the new volume level
+        send_notification "Current volume: $current_volume"
+
+        # Update old volume
+        old_volume=$current_volume
+        ((notification_id++))
+    fi
+
+    # Wait for 1 second before checking again
+    sleep 5
+done
+

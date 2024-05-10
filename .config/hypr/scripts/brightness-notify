@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Initial brightness level
+old_brightness=$(brightnessctl g)
+
+# Function to convert brightness scale from 0-100%
+convert_brightness_scale() {
+    local input=$1
+    local output=$((input * 100 / 255))
+    echo "$output"
+}
+
+while true; do
+    # Get current brightness level
+    current_brightness=$(brightnessctl g)
+    
+    # Convert brightness scale from 0-100%
+    current_brightness_percent=$(convert_brightness_scale "$current_brightness")
+    old_brightness_percent=$(convert_brightness_scale "$old_brightness")
+    
+    # Compare current brightness with old brightness
+    if [[ "$current_brightness_percent" != "$old_brightness_percent" ]]; then
+        # Send notification with brightness level
+        notify-send "Brightness Changed" "Current brightness: $current_brightness_percent%"
+        
+        # Update old brightness
+        old_brightness=$current_brightness
+    fi
+    
+    # Wait for 1 second before checking again
+    sleep 2
+done
+
